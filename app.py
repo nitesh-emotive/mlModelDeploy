@@ -45,8 +45,8 @@ def load_model():
     try:
         logger.info("Loading T5 model...")
         tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
-        # model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
-        model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH, from_safetensors=True)
+        model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
+        # model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH, from_safetensors=True)
 
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model.to(device)

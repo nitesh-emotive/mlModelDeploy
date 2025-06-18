@@ -39,31 +39,15 @@ device = None
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# def load_model():
-#     """Load the ML model once at startup"""
-#     global tokenizer, model, device
-#     try:
-#         logger.info("Loading T5 model...")
-#         tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
-#         # model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
-#         model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH, from_safetensors=True)
-
-#         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#         model.to(device)
-#         model.eval()
-#         logger.info(f"Model loaded successfully on {device}")
-#         return True
-#     except Exception as e:
-#         logger.error(f"Failed to load model: {e}")
-#         return False
-
 def load_model():
     """Load the ML model once at startup"""
     global tokenizer, model, device
     try:
         logger.info("Loading T5 model...")
         tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
-        model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH, from_safetensors=True)
+        model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
+        # model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH, from_safetensors=True)
+
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model.to(device)
         model.eval()
@@ -72,6 +56,7 @@ def load_model():
     except Exception as e:
         logger.error(f"Failed to load model: {e}")
         return False
+
 
 def detect_title_column(df):
     """Detect the title column in the dataframe"""
